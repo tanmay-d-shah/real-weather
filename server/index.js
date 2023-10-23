@@ -28,14 +28,15 @@ async function getWeatherData() {
 app.ws('/forecast', async function (ws, req) {
   const latitude = req.query.lat ?? 12
   const longitude = req.query.long ?? 27
-  setInterval(async () => {
-    const weatherForecastData = await getWeatherForecastData(latitude, longitude)
-    ws.send(JSON.stringify(weatherForecastData))
-  }, 30000)
+  // setInterval(async () => {
+  //   const weatherForecastData = await getWeatherForecastData(latitude, longitude)
+  //   ws.send(JSON.stringify(weatherForecastData))
+  // }, 30000)
 
-  const weatherForecastData = await getWeatherForecastData(latitude, latitude)
-  ws.send(JSON.stringify(weatherForecastData))
+  // const weatherForecastData = await getWeatherForecastData(latitude, latitude)
+  // ws.send(JSON.stringify(weatherForecastData))
 
+  ws.send('Hello')
   ws.on('message', function message(data) {
     console.log('received: %s', data);
   });
