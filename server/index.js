@@ -25,22 +25,9 @@ async function getWeatherData() {
   return weatherData
 }
 
-app.ws('/weather', async function (ws, req) {
-  setInterval(async () => {
-    const weatherData = await getWeatherData()
-    ws.send(JSON.stringify(weatherData))
-  }, 10000)
-
-  const weatherData = await getWeatherData()
-  ws.send(JSON.stringify(weatherData))
-  ws.on('message', function message(data) {
-    console.log('received: %s', data);
-  });
-})
-
 app.ws('/forecast', async function (ws, req) {
-  const latitude = req.query.lat
-  const longitude = req.query.long
+  const latitude = req.query.lat ?? 12
+  const longitude = req.query.long ?? 27
   setInterval(async () => {
     const weatherForecastData = await getWeatherForecastData(latitude, longitude)
     ws.send(JSON.stringify(weatherForecastData))
@@ -54,4 +41,4 @@ app.ws('/forecast', async function (ws, req) {
   });
 })
 
-app.listen(5174)
+app.listen(5173)
