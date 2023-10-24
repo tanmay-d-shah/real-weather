@@ -42,7 +42,7 @@ app.ws('/current-weather', async function (ws, req) {
     setInterval(async () => {
       const currentWeatherData = await getCurrentWeatherData(latitude, longitude)
       ws.send(JSON.stringify(currentWeatherData))
-    }, 1000 * 60 * 2)
+    }, 1000 * 60 * 1)
 
     const weatherForecastData = await getCurrentWeatherData(latitude, longitude)
     ws.send(JSON.stringify(weatherForecastData))
