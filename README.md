@@ -6,12 +6,14 @@ in real time
 ## Demo : https://real-weather-one.vercel.app/
 
 ## Features :
-1. Uses web sockets to communicate in real time
-2. Uses Redux toolkit for efficient state management
-3. Disconnects web sockets when browser tab/page is inactive and reconnects when page is active
-4. Detailed Charts based on weather data from https://open-meteo.com/
-5. Separate server hosted to mimic a weather server emitting web sockets
-6. ARIA complaint UI using HeadlessUI
+1. Detailed Charts based on weather data from https://open-meteo.com/
+2. Auto detect location and search for other locations
+3. Uses web sockets to communicate in real time
+4. Uses Redux toolkit for efficient state management
+5. Disconnects web sockets when browser tab/page is inactive and reconnects when page is active
+6. Separate server hosted to mimic a weather server emitting web sockets
+7. ARIA complaint UI using HeadlessUI
+8. Automated tests
 
 ## Tech Used : 
 1. React.JS
