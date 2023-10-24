@@ -9,17 +9,10 @@ export interface GeoCodedLocation {
   elevation: number
   feature_code: string
   country_code: string
-  admin1_id: number
-  admin3_id: number
-  admin4_id: number
   timezone: string
   population: number
-  postcodes: string[]
   country_id: number
   country: string
-  admin1: string
-  admin3: string
-  admin4: string
   status: "idle" | "loading" | "loaded" | "error"
 }
 
@@ -36,17 +29,11 @@ const initialState: GeoCodedLocation = {
   elevation: 0,
   feature_code: "",
   country_code: "",
-  admin1_id: 0,
-  admin3_id: 0,
-  admin4_id: 0,
   timezone: "",
   population: 0,
-  postcodes: [],
   country_id: 0,
   country: "",
-  admin1: "",
-  admin3: "",
-  admin4: "",
+
   status: "idle",
 }
 
@@ -63,6 +50,7 @@ export const locationSlice = createSlice({
       return { ...action.payload, status: "loaded" }
     },
     setLocationCoords: (state, action: PayloadAction<GeoCoordinates>) => {
+      // just sets the location coords and status
       return {
         ...initialState,
         latitude: action.payload.latitude,

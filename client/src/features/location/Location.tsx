@@ -77,7 +77,7 @@ export default function Location() {
                     key={locationSuggestion.id}
                     className={({ active }) =>
                       `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                        active ? "bg-teal-600 text-white" : "text-gray-900"
+                        active ? "bg-blue-600 text-white" : "text-gray-900"
                       }`
                     }
                     value={locationSuggestion}

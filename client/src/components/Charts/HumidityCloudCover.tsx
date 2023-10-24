@@ -78,6 +78,7 @@ export function HumidityCloudCover({
     })
     .filter((_, idx) => idx % 3 === 0)
 
+  // take values in interval of 3 hours
   const humidityValues = data.humidity?.filter((_, idx) => idx % 3 === 0)
   const cloudCoverValues = data.cloudCover?.filter((_, idx) => idx % 3 === 0)
 
@@ -98,6 +99,16 @@ export function HumidityCloudCover({
       },
     ],
   }
-  // @ts-expect-error
-  return <Line className="h-80" options={options} data={tempData} />
+
+  return (
+    <Line
+      aria-label="Line Chart for Humidity and Cloud Cover wrt Time"
+      role="line-chart"
+      className="h-80"
+      // @ts-expect-error Due to conflicting types for chartjs and react-chartjs-2
+      options={options}
+      data={tempData}
+      t
+    />
+  )
 }

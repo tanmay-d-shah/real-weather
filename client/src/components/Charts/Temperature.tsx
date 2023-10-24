@@ -72,6 +72,7 @@ export function Temperature({
     })
     .filter((_, idx) => idx % 3 === 0)
 
+  // take values in interval of 3 hours
   const tempValues = data?.filter((_, idx) => idx % 3 === 0)
   const tempData = {
     labels,
@@ -86,6 +87,15 @@ export function Temperature({
       },
     ],
   }
-  // @ts-expect-error
-  return <Line className="h-80" options={options} data={tempData} />
+
+  return (
+    <Line
+      aria-label="Area Chart for Temperature wrt Time"
+      role="area-chart"
+      className="h-80"
+      // @ts-expect-error Due to conflicting types for chartjs and react-chartjs-2
+      options={options}
+      data={tempData}
+    />
+  )
 }

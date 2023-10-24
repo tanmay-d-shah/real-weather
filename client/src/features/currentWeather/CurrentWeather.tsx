@@ -8,6 +8,7 @@ import {
   updateCurrentWeather,
 } from "./currentWeatherSlice"
 import { selectLocation } from "../location/locationSlice"
+import { REMOTE_SERVER_URL } from "../../constants"
 
 export default function CurrentWeather() {
   const dispatch = useAppDispatch()
@@ -17,7 +18,7 @@ export default function CurrentWeather() {
   const isCurrentWeatherDataLoaded = currentWeatherData.status === "loaded"
 
   useWebSocket(
-    `wss://weather-socket.onrender.com/current-weather?lat=${selectedLocation.latitude}&long=${selectedLocation.longitude}`,
+    `${REMOTE_SERVER_URL}/current-weather?lat=${selectedLocation.latitude}&long=${selectedLocation.longitude}`,
     {
       onOpen: () => console.log("WebSocket connection opened."),
       onClose: () => console.log("WebSocket connection closed."),

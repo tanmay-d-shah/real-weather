@@ -7,13 +7,14 @@ import useWebSocket from "react-use-websocket"
 import {
   ForecastState,
   selectForecast,
-  updateNewForecastData,
+  updateForecastData,
 } from "./forecastSlice"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import WeatherCharts from "../../components/Charts/WeatherCharts"
 import { buildHourlyDayForecastMap } from "../../utils/buildHourlyDayForecastMap"
 import { selectLocation } from "../location/locationSlice"
 import { Bars } from "react-loader-spinner"
+import { REMOTE_SERVER_URL } from "../../constants"
 
 dayjs.extend(customParseFormat)
 
@@ -25,7 +26,7 @@ export function Forecast() {
   const isForecastDataLoaded = forecastData.status === "loaded"
 
   useWebSocket(
-    `wss://weather-socket.onrender.com/forecast?lat=${selectedLocation.latitude}&long=${selectedLocation.longitude}`,
+    `${REMOTE_SERVER_URL}/forecast?lat=${selectedLocation.latitude}&long=${selectedLocation.longitude}`,
     {
       onOpen: () => console.log("WebSocket connection opened."),
       onClose: () => console.log("WebSocket connection closed."),
@@ -38,7 +39,7 @@ export function Forecast() {
   const processMessages = (event: { data: string }) => {
     const response = JSON.parse(event.data) as ForecastState
     if (isLocationLoaded) {
-      dispatch(updateNewForecastData({ ...response, status: "idle" }))
+      dispatch(updateForecastData({ ...response, status: "idle" }))
     }
   }
 

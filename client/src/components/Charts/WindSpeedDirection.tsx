@@ -85,6 +85,7 @@ export function WindSpeedDirection({
     windDirection: HourlyDayForecastData["windDirection"] | undefined
   }
 }) {
+  // take values in interval of 3 hours
   const labels = data.windDirection
     ?.map((_, index) => {
       return dayjs(index.toString(), "H").format("h a")
@@ -114,6 +115,15 @@ export function WindSpeedDirection({
       },
     ],
   }
-  // @ts-expect-error Due to conflicting types for chartjs and react-chartjs-2
-  return <Line className="h-80" options={options} data={tempData} />
+
+  return (
+    <Line
+      aria-label="Multi Axes Chart for Wind Speed and Wind Direction wrt Time"
+      role="multi-axes-chart"
+      className="h-80"
+      // @ts-expect-error Due to conflicting types for chartjs and react-chartjs-2
+      options={options}
+      data={tempData}
+    />
+  )
 }

@@ -87,7 +87,7 @@ export const forecastSlice = createSlice({
   name: "Forecast",
   initialState: initialState,
   reducers: {
-    updateNewForecastData: (state, action: PayloadAction<ForecastState>) => {
+    updateForecastData: (state, action: PayloadAction<ForecastState>) => {
       return {
         ...action.payload,
         status: "loaded",
@@ -96,7 +96,7 @@ export const forecastSlice = createSlice({
   },
 })
 
-export const { updateNewForecastData } = forecastSlice.actions
+export const { updateForecastData } = forecastSlice.actions
 
 export const selectForecast = (state: RootState) => state.forecast
 
