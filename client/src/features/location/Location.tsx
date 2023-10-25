@@ -59,10 +59,10 @@ export default function Location() {
               className="w-full h-12 border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:outline-none focus:ring-0"
               displayValue={(location: GeoCodedLocation) => location.name}
               onChange={(event) => {
+                console.log("changed", event.target.value)
                 setQuery(event.target.value)
                 debouncedAutoComplete()
               }}
-              value={query}
             />
           </div>
           <Transition
