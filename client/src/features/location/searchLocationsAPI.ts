@@ -7,6 +7,13 @@ export async function fetchSearchLocationResults(searchString: string) {
   const searchLocationResults =
     (await searchLocationResposne.json()) as SearchLocationResults
 
+  if (
+    !searchLocationResults.results ||
+    searchLocationResults.results.length === 0
+  ) {
+    return searchLocationResults
+  }
+
   const resultsWithStatus = searchLocationResults.results.map((result) => {
     return {
       ...result,

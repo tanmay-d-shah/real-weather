@@ -9,6 +9,7 @@ import {
   setLocation,
 } from "./locationSlice"
 import { fetchSearchLocationResults } from "./searchLocationsAPI"
+import { useDebounce } from "../../hooks/useDebounce"
 
 export default function Location() {
   const [query, setQuery] = useState("")
@@ -20,8 +21,7 @@ export default function Location() {
     dispatch(setLocation({ ...location, status: "idle" }))
   }
 
-  async function autocomplete(query: string) {
-    setQuery(query)
+  async function autocomplete() {
     const locationSearchResults = await fetchSearchLocationResults(query)
     if (locationSearchResults.results) {
       const nameSet = new Set<string>()
@@ -42,6 +42,8 @@ export default function Location() {
     }
   }
 
+  const debouncedAutoComplete = useDebounce(autocomplete, 300)
+
   const [searchResults, setSearchResults] = useState<SearchLocationResults>({
     results: [],
     generationtime_ms: 0,
@@ -56,7 +58,10 @@ export default function Location() {
               placeholder="Search Locations"
               className="w-full h-12 border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:outline-none focus:ring-0"
               displayValue={(location: GeoCodedLocation) => location.name}
-              onChange={(event) => autocomplete(event.target.value)}
+              onChange={(event) => {
+                setQuery(event.target.value)
+                debouncedAutoComplete()
+              }}
               value={query}
             />
           </div>
